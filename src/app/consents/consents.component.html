@@ -1,1 +1,38 @@
-Consents
+<div class="container mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSource">
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="userName">
+            <mat-header-cell *matHeaderCellDef>Name </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.email}}</mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="consent">
+            <mat-header-cell *matHeaderCellDef> Consent given for </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.consent}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator
+        [length]="exampleDatabase.data.length"
+        [pageIndex]="0"
+        [pageSize]="2"
+        >
+    </mat-paginator>
+    <div class="textCenter">
+    <ul class="pagination ">
+        <li  [ngClass]="{'active': (pageNum -1) ===paginator.pageIndex}"  *ngFor="let pageNum of getPages()"><span (click)="onPage(pageNum)">{{pageNum}}</span></li>
+    </ul>
+    </div>
+
+</div>

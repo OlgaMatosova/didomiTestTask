@@ -9,7 +9,7 @@
                        [(ngModel)]="model.name" 
                        name="name"
                        #name="ngModel">
-                       <show-errors [control]="username" [form]="consentForm"></show-errors>
+                <show-errors [control]="username" [form]="consentForm"></show-errors>
             </mat-form-field>
             <mat-form-field>
                 <input type="email"  
@@ -26,7 +26,8 @@
         <p class="textCenter">I agree to:</p>
         <mat-card class="listOfConsents">
             <div *ngFor="let consent of consents">
-                <p><mat-checkbox>{{consent}}</mat-checkbox></p>
+            <p><mat-checkbox>{{consent}}</mat-checkbox></p>
+       
             </div>
         </mat-card>
         <div class="textCenter">
