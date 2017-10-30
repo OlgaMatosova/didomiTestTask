@@ -5,11 +5,11 @@ import {ConsentsComponent} from './consents/consents.component';
 const appRoutes: Routes = [
     {
         path: 'consents',
-        component: GiveConsentComponent
+        component: ConsentsComponent
     },
     {
         path: 'give-consent',
-        component: ConsentsComponent
+        component: GiveConsentComponent
     },
     {
         path: '**',

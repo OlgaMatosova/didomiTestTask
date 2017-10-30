@@ -1,1 +1,36 @@
-give-consents
+<div class="container">
+    <form (ngSubmit)="onSubmit()" #consentForm="ngForm">
+        <div class="form-group">
+            <mat-form-field>
+                <input type="text" id="name"
+                       required
+                       placeholder="Name"
+                       matInput
+                       [(ngModel)]="model.name" 
+                       name="name"
+                       #name="ngModel">
+                       <show-errors [control]="username" [form]="consentForm"></show-errors>
+            </mat-form-field>
+            <mat-form-field>
+                <input type="email"  
+                       matInput  
+                       id="email"
+                       placeholder="Email address"
+                       required
+                       minlength="6"
+                       [(ngModel)]="model.email" 
+                       name="email">
+                <show-errors [control]="username" [form]="consentForm"></show-errors>
+            </mat-form-field>
+        </div>
+        <p class="textCenter">I agree to:</p>
+        <mat-card class="listOfConsents">
+            <div *ngFor="let consent of consents">
+                <p><mat-checkbox>{{consent}}</mat-checkbox></p>
+            </div>
+        </mat-card>
+        <div class="textCenter">
+            <button type="submit" mat-raised-button color="primary" [disabled]="!consentForm.form.valid">Submit</button>
+        </div>
+    </form>
+</div>
