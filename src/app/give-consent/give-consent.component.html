@@ -1,37 +1,19 @@
-<div class="container">
-    <form (ngSubmit)="onSubmit()" #consentForm="ngForm">
-        <div class="form-group">
-            <mat-form-field>
-                <input type="text" id="name"
-                       required
-                       placeholder="Name"
-                       matInput
-                       [(ngModel)]="model.name" 
-                       name="name"
-                       #name="ngModel">
-                <show-errors [control]="username" [form]="consentForm"></show-errors>
-            </mat-form-field>
-            <mat-form-field>
-                <input type="email"  
-                       matInput  
-                       id="email"
-                       placeholder="Email address"
-                       required
-                       minlength="6"
-                       [(ngModel)]="model.email" 
-                       name="email">
-                <show-errors [control]="username" [form]="consentForm"></show-errors>
-            </mat-form-field>
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" #consentForm="ngForm" novalidate>
+    <mat-form-field>
+        <input  matInput formControlName="name" required placeholder="Name">
+        <show-errors [control]="name"  [form]="consentForm"></show-errors>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput formControlName="email" required  placeholder="Email address" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+        <show-errors [control]="email" [form]="consentForm"></show-errors>
+    </mat-form-field>
+    <p class="textCenter">I agree to:</p>
+    <mat-card class="listOfConsents">
+        <div *ngFor="let consent of consents.controls; let i=index">
+            <mat-checkbox [formControl]="consent">{{user.consents[i].name}}</mat-checkbox>
         </div>
-        <p class="textCenter">I agree to:</p>
-        <mat-card class="listOfConsents">
-            <div *ngFor="let consent of consents">
-            <p><mat-checkbox>{{consent}}</mat-checkbox></p>
-       
-            </div>
-        </mat-card>
-        <div class="textCenter">
-            <button type="submit" mat-raised-button color="primary" [disabled]="!consentForm.form.valid">Submit</button>
-        </div>
-    </form>
-</div>
+    </mat-card>
+    <div class="textCenter">
+        <button type="submit" matStepperNext mat-raised-button color="primary" [disabled]="!consentForm.form.valid">Submit</button>
+    </div>
+</form>

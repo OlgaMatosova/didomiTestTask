@@ -1,4 +1,4 @@
-<div class="container mat-elevation-z8">
+<div class="mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource">
 
         <!-- Color Column -->
@@ -16,7 +16,7 @@
 
         <ng-container matColumnDef="consent">
             <mat-header-cell *matHeaderCellDef> Consent given for </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.consent}} </mat-cell>
+            <mat-cell *matCellDef="let row"> {{row.consents}} </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

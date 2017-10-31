@@ -3,7 +3,6 @@ import {DataSource} from '@angular/cdk/collections';
 import {MatPaginator} from '@angular/material';
 import {User} from '../interfaces/user';
 import {ExampleDatabase} from './service/data';
-
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
@@ -19,26 +18,31 @@ import 'rxjs/add/operator/map';
 })
 export class ConsentsComponent {
     displayedColumns = ['userName', 'email', 'consent'];
-    exampleDatabase = new ExampleDatabase();
+
     dataSource: ExampleDataSource | null;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
+    constructor(private exampleDatabase: ExampleDatabase) {}
 
     ngOnInit() {
-       this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
+        this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
     }
-    
+
+    ngDoCheck() {
+        this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
+    }
+
     getPages(): number[] {
         const pages: number[] = [];
-        let pagesCount = this.paginator.length/this.paginator.pageSize;
-         for(let i = 0; i<pagesCount; i++){
-             pages.push(i+1);
-         }
-         return pages;
+        let pagesCount = this.paginator.length / this.paginator.pageSize;
+        for (let i = 0; i < pagesCount; i++) {
+            pages.push(i + 1);
+        }
+        return pages;
     }
-    
-    onPage(page){
-        
+
+    onPage(page) {
+
         this.paginator.pageIndex = page - 1;
         this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
     }
@@ -56,25 +60,25 @@ export class ConsentsComponent {
  * should be rendered.
  */
 export class ExampleDataSource extends DataSource<any> {
-  constructor(private _exampleDatabase: ExampleDatabase, private _paginator: MatPaginator) {
-    super();
-  }
+    constructor(private _exampleDatabase: ExampleDatabase, private _paginator: MatPaginator) {
+        super();
+    }
 
-  /** Connect function called by the table to retrieve one stream containing the data to render. */
-  connect(): Observable<User[]> {
-    const displayDataChanges = [
-      this._exampleDatabase.dataChange,
-      this._paginator.page,
-    ];
+    /** Connect function called by the table to retrieve one stream containing the data to render. */
+    connect(): Observable<User[]> {
+        const displayDataChanges = [
+            this._exampleDatabase.dataChange,
+            this._paginator.page,
+        ];
 
-    return Observable.merge(...displayDataChanges).map(() => {
+        return Observable.merge(...displayDataChanges).map(() => {
 
-      const data = this._exampleDatabase.data.slice();
+            const data = this._exampleDatabase.data.slice();
 
-      const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-      return data.splice(startIndex, this._paginator.pageSize);
-    });
-  }
+            const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
+            return data.splice(startIndex, this._paginator.pageSize);
+        });
+    }
 
-  disconnect() {}
+    disconnect() {}
 }

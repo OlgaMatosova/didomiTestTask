@@ -6,4 +6,13 @@ import {ViewEncapsulation} from '@angular/core';
     styleUrls: ['./app.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class AppComponent {}
+export class AppComponent {
+    isLinear = true;
+    form = {
+        invalid: true
+    }
+
+    onHide(val: boolean) {
+        this.form.invalid = val;
+    }
+}
