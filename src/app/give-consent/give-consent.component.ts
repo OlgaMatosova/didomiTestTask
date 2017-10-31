@@ -4,6 +4,7 @@ import {User} from '../interfaces/user';
 import {ExampleDatabase} from '../consents/service/data';
 import {Router} from '@angular/router';
 
+
 @Component({
     selector: 'give-consent',
     templateUrl: 'give-consent.component.html',
@@ -38,7 +39,6 @@ export class GiveConsentComponent {
         return this.form.get('consents') as FormArray;
     };
 
-
     buildSkills() {
         const arr = this.user.consents.map(s => {
             return this.fb.control(s.selected);
@@ -47,12 +47,8 @@ export class GiveConsentComponent {
         return this.fb.array(arr, this.validateConsent);
     }
 
-    ngDoCheck() {
-        if (this.form.valid) this.onHide.emit(false);
-    }
-
     onSubmit(value) {
-        this.onHide.emit(false);
+        this.onHide.emit(!this.form.valid);
         const f: User = Object.assign({}, value, {
             consents: value.consents.map((s, i) => {
                 if (s) {
@@ -66,13 +62,11 @@ export class GiveConsentComponent {
 
         this.router.navigate(['/consents']);
         this.exampleDatabase.setData(f);
-
     }
 
     private validateConsent(formGroup: FormGroup) {
 
         for (let key in formGroup.controls) {
-
             if (formGroup.controls.hasOwnProperty(key)) {
                 let control: FormControl = <FormControl> formGroup.controls[key];
 

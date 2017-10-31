@@ -1,6 +1,7 @@
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {User} from '../../interfaces/user';
 import {Injectable} from '@angular/core';
+import {Http} from '@angular/http';
 
 @Injectable()
 export class ExampleDatabase {
@@ -35,8 +36,10 @@ export class ExampleDatabase {
         this.dataArr.unshift(item);
     }
 
-
-    constructor() {
+    getData(){
+        return this.http.get('data.json');
+    }
+    constructor(private http: Http) {
       // Fill up the database with 100 users.
 
     }

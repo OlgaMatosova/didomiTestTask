@@ -1,10 +1,10 @@
-
+{{form.invalid}}
 <mat-vertical-stepper class="container" [linear]="isLinear">
     <mat-step [stepControl]="form">
         <ng-template matStepLabel>Give consent</ng-template>
         <give-consent (onHide)="onHide($event)"  ></give-consent>
     </mat-step>
-    <mat-step [stepControl]="2" >
+    <mat-step [stepControl]="2">
         <ng-template matStepLabel>Collected Consents</ng-template>
         <consents></consents>
     </mat-step>
