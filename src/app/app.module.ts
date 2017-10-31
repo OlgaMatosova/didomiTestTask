@@ -19,6 +19,7 @@ import {
     MatGridListModule,
     MatButtonModule,
     MatStepperModule,
+    MatStepper,
     MatTableModule,
     MatPaginatorModule
    
@@ -48,10 +49,12 @@ import {
         MatButtonModule,
         MatStepperModule,
         MatTableModule,
+        
         MatPaginatorModule
     ],
     providers: [
         ExampleDatabase,
+        MatStepper,
         {provide: APP_BASE_HREF, useValue : '/'}],
         bootstrap: [AppComponent],
        schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ]

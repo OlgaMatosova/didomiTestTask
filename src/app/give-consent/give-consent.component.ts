@@ -3,7 +3,7 @@ import {FormControl, FormGroup, FormArray, FormBuilder, Validators} from '@angul
 import {User} from '../interfaces/user';
 import {ExampleDatabase} from '../consents/service/data';
 import {Router} from '@angular/router';
-
+import { MatStepper } from '@angular/material';
 
 @Component({
     selector: 'give-consent',
@@ -22,9 +22,8 @@ export class GiveConsentComponent {
     form: FormGroup;
     @Output() onHide = new EventEmitter<boolean>();
 
-    constructor(private fb: FormBuilder, public exampleDatabase: ExampleDatabase, private router: Router) {
+    constructor(private fb: FormBuilder, private stepper: MatStepper, public exampleDatabase: ExampleDatabase, private router: Router) {
         this.createForm();
-
     }
 
     createForm() {
@@ -55,11 +54,12 @@ export class GiveConsentComponent {
                     return this.user.consents[i].name
                 }
                 else {
-                    return '';
+                    
+                    return;
                 }
             })
         });
-
+        this.stepper.next();
         this.router.navigate(['/consents']);
         this.exampleDatabase.setData(f);
     }

@@ -7,16 +7,19 @@ import { APP_BASE_HREF } from '@angular/common';
 import {routing} from './app.routing';
 import { ShowErrorsComponent } from './errors/show-errors.component';
 import {ExampleDatabase} from './consents/service/data';
+import {HttpModule, JsonpModule} from '@angular/http';
 import {
     MatFormFieldModule,
     MatTableModule,
-    MatPaginatorModule
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatCardModule,
    
 } from '@angular/material';
 import {
 
     MatStepperModule,
-
+    
 
 } from '@angular/material';
 
@@ -32,11 +35,15 @@ describe('AppComponent', () => {
     imports: [
         routing,
         FormsModule,
+        HttpModule, 
+        JsonpModule,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatStepperModule,
         MatTableModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatCheckboxModule,
+        MatCardModule,
     ], providers: [
     ExampleDatabase,
         { provide: APP_BASE_HREF, useValue : '/' }

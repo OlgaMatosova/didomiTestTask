@@ -4,19 +4,19 @@ import {GiveConsentComponent} from './give-consent.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ConsentsComponent} from '../consents/consents.component';
 import {APP_BASE_HREF} from '@angular/common';
+
 import {
     MatFormFieldModule,
     MatCardModule,
     MatCheckboxModule,
     MatInputModule,
     MatMenuModule,
-
     MatButtonModule,
-
     MatTableModule,
     MatPaginatorModule
 
 } from '@angular/material';
+import { MatStepper } from '@angular/material';
 import {routing} from '../app.routing';
 import {ShowErrorsComponent} from '../errors/show-errors.component';
 
@@ -40,13 +40,14 @@ describe('GiveConsentComponent', () => {
                 MatPaginatorModule],
             providers: [
                 ExampleDatabase,
-
+               
                 {provide: APP_BASE_HREF, useValue: '/'}
             ],
             declarations: [
                 GiveConsentComponent,
                 ShowErrorsComponent,
-                ConsentsComponent
+                ConsentsComponent,
+                MatStepper
             ]
         })
             .compileComponents();
@@ -86,9 +87,6 @@ describe('GiveConsentComponent', () => {
         let consents = component.form.controls['consents'];
         expect(consents.valid).toBeFalsy();
         let errors = {};
-        //          console.log(consents);
-        //        errors = consents.errors || {};
-        //        expect(errors['required']).toBeTruthy(); 
     });
 
     it('submitting a form emits', () => {
@@ -112,7 +110,7 @@ describe('GiveConsentComponent', () => {
     });
 
     it('should be data exist', () => {
-        let data = component.exampleDatabase.data;
+        let data = component.exampleDatabase.getData();
         expect(data).toBeTruthy();
     });
 

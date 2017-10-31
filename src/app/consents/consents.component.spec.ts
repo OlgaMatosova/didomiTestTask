@@ -4,6 +4,7 @@ import {GiveConsentComponent} from '../give-consent/give-consent.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ConsentsComponent} from './consents.component';
 import {APP_BASE_HREF} from '@angular/common';
+import {HttpModule, JsonpModule} from '@angular/http';
 import {
     MatFormFieldModule,
     MatCardModule,
@@ -35,6 +36,7 @@ describe('ConsentsComponent', () => {
                 MatButtonModule,
                 routing,
                 MatTableModule,
+                HttpModule, JsonpModule,
                 MatPaginatorModule],
             providers: [
                 ExampleDatabase,
@@ -59,7 +61,7 @@ describe('ConsentsComponent', () => {
     });
 
     it('should be data exist', () => {
-        let data = component.exampleDatabase.data;
+     let data = component.exampleDatabase.getData();
         expect(data).toBeTruthy();
     });
 });

@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ViewChild, AfterViewInit} from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {MatPaginator} from '@angular/material';
 import {User} from '../interfaces/user';
@@ -24,7 +24,7 @@ export class ConsentsComponent {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     constructor(public exampleDatabase: ExampleDatabase) {}
 
-    ngOnInit() {
+    ngOnInit() { 
         this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
     }
 
@@ -42,10 +42,10 @@ export class ConsentsComponent {
     }
 
     onPage(page) {
-
         this.paginator.pageIndex = page - 1;
         this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
     }
+   
 }
 
 
@@ -64,7 +64,7 @@ export class ExampleDataSource extends DataSource<any> {
         super();
     }
 
-    /** Connect function called by the table to retrieve one stream containing the data to render. */
+//    /** Connect function called by the table to retrieve one stream containing the data to render. */
     connect(): Observable<User[]> {
         const displayDataChanges = [
             this._exampleDatabase.dataChange,
