@@ -25,12 +25,11 @@ export class ConsentsComponent {
     constructor(public exampleDatabase: ExampleDatabase) {}
 
     ngOnInit() {
-        this.exampleDatabase.getData().subscribe((data) => console.log(data));
-//        this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
+        this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
     }
 
     ngDoCheck() {
-//        this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
+        this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
     }
 
     getPages(): number[] {
@@ -43,9 +42,9 @@ export class ConsentsComponent {
     }
 
     onPage(page) {
-        
+
         this.paginator.pageIndex = page - 1;
-//        this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
+        this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
     }
 }
 
@@ -63,8 +62,6 @@ export class ConsentsComponent {
 export class ExampleDataSource extends DataSource<any> {
     constructor(public _exampleDatabase: ExampleDatabase, private _paginator: MatPaginator) {
         super();
-            this._exampleDatabase.getData().subscribe((data) => console.log(data));
-        
     }
 
     /** Connect function called by the table to retrieve one stream containing the data to render. */
@@ -73,15 +70,13 @@ export class ExampleDataSource extends DataSource<any> {
             this._exampleDatabase.dataChange,
             this._paginator.page,
         ];
-    
+
         return Observable.merge(...displayDataChanges).map(() => {
-        
-            let data;
-             
-//            const data = this._exampleDatabase.data.slice();
-           
+
+            const data = this._exampleDatabase.data.slice();
+
             const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-            return data;
+            return data.splice(startIndex, this._paginator.pageSize);
         });
     }
 

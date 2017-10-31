@@ -37,10 +37,10 @@ export class ExampleDatabase {
     }
 
     getData(){
-        return this.http.get('data.json');
+        return this.http.get('assets/data.json')
     }
     constructor(private http: Http) {
       // Fill up the database with 100 users.
-
+        this.getData().map(res => res.json()).subscribe((data) => { this.dataArr = data});
     }
 }
