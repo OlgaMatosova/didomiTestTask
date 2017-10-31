@@ -22,7 +22,7 @@ export class ConsentsComponent {
     dataSource: ExampleDataSource | null;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
-    constructor(private exampleDatabase: ExampleDatabase) {}
+    constructor(public exampleDatabase: ExampleDatabase) {}
 
     ngOnInit() {
         this.dataSource = new ExampleDataSource(this.exampleDatabase, this.paginator);
@@ -60,7 +60,7 @@ export class ConsentsComponent {
  * should be rendered.
  */
 export class ExampleDataSource extends DataSource<any> {
-    constructor(private _exampleDatabase: ExampleDatabase, private _paginator: MatPaginator) {
+    constructor(public _exampleDatabase: ExampleDatabase, private _paginator: MatPaginator) {
         super();
     }
 

@@ -21,7 +21,7 @@ export class GiveConsentComponent {
     form: FormGroup;
     @Output() onHide = new EventEmitter<boolean>();
 
-    constructor(private fb: FormBuilder, private exampleDatabase: ExampleDatabase, private router: Router) {
+    constructor(private fb: FormBuilder, public exampleDatabase: ExampleDatabase, private router: Router) {
         this.createForm();
 
     }
